@@ -1,0 +1,19 @@
+{
+  "name": "taskapp",
+  "version": "1.0.0",
+  "description": "An app to hold tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "author": "Edward Pledger",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "mongoose": "^5.9.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
