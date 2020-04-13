@@ -1,0 +1,4 @@
+1.) Look into using compression (gzip)
+2.) Remove node modules from github
+3.) Look into converting ot es6 modules for importing
+4.) Look into dependency injection for services
