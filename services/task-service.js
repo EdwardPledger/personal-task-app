@@ -3,8 +3,9 @@ class TaskService {
     this.taskRepo = taskRepo;
   }
 
-  getAllTasks() {
-    const tasks = this.taskRepo.getAllTasks();
+  async getAllTasks() {
+    const tasks = await this.taskRepo.getAllTasks();
+    console.log('tasks', tasks);
     if (tasks.length === 0) console.log('No tasks found in database.');
     return tasks;
   }

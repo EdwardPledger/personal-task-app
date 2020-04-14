@@ -3,15 +3,20 @@ const Task = require('../models/task');
 /**
  * Get all the tasks
  */
-exports.getAllTasks = () => {
-  Task.find({}, (err, docs) => {
+exports.getAllTasks = async () => {
+  let tasks;
+
+  await Task.find({}, (err, docs) => {
     if (!err) {
-      return docs;
+      console.log('docs', docs);
+      tasks = docs;
     }
     // Return an empty array if error occurs
     console.error(`Repo Error (getAllTasks): \n${err}`);
-    return [];
+    tasks = [];
   });
+
+  return tasks;
 };
 
 /**
