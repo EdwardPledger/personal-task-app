@@ -1,51 +1,58 @@
 const Task = require('../models/task');
 
 /**
+ * Get task by id
+ */
+// exports.getTaskById = async (taskId) => {
+//   await Task.findOne({ id: taskId })
+// };
+
+/**
  * Get all the tasks
  */
 exports.getAllTasks = async () => {
   let tasks;
-
-  await Task.find({}, (err, docs) => {
-    if (!err) {
-      console.log('docs', docs);
-      tasks = docs;
-    }
-    // Return an empty array if error occurs
+  try {
+    tasks = await Task.find({});
+  } catch (err) {
     console.error(`Repo Error (getAllTasks): \n${err}`);
-    tasks = [];
-  });
-
+  }
   return tasks;
 };
 
 /**
  * Insert a new task
  */
-exports.insertTask = (task) => {
-  task.save((err, doc) => {
-    if (err) {
-      console.error(`Repo Error (insertTask): \n${err}`);
-    }
-    console.log(`Successfully inserted new task: \n${doc}`);
-  });
+exports.insertTask = async (task) => {
+  try {
+    await task.save();
+    console.log(`Successfully inserted new task: \n${task}`);
+  } catch (err) {
+    console.error(`Repo Error (insertTask): \n${err}`);
+  }
 };
 
 
 /**
  * Delete a task
  */
-exports.deleteTask = (taskId) => {
-  Task.deleteOne({ _id: taskId }, (err) => {
+exports.deleteTask = async (taskId) => {
+  try {
+    const task = await Task.findOneAndDelete({ _id: taskId });
+    console.log(`Successfully deleted task: \n${task}`);
+  } catch (err) {
     console.error(`Repo Error (deleteTask): \n${err}`);
-  });
+  }
 };
 
 /**
  * Delete all tasks
  */
-exports.deleteAllTasks = () => {
-  Task.deleteMany({}, (err) => {
+exports.deleteAllTasks = async () => {
+  try {
+    await Task.deleteMany({});
+    console.log('Successfully deleted all tasks!');
+  } catch (err) {
     console.error(`Repo Error (deleteAllTasks): \n${err}`);
-  });
+  }
 };

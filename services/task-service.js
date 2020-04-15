@@ -1,3 +1,5 @@
+const { createTask } = require('../util/task-util');
+
 class TaskService {
   constructor(taskRepo) {
     this.taskRepo = taskRepo;
@@ -10,12 +12,13 @@ class TaskService {
     return tasks;
   }
 
-  insertTask() {
-    this.taskRepo.insertTask();
+  insertTask(taskDto) {
+    const task = createTask(taskDto);
+    this.taskRepo.insertTask(task);
   }
 
-  deleteTask() {
-    this.taskRepo.deleteTask();
+  deleteTask(taskId) {
+    this.taskRepo.deleteTask(taskId);
   }
 
   deleteAllTasks() {
