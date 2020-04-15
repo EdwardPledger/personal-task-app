@@ -6,9 +6,19 @@ const router = new KoaRouter();
 const taskService = new TaskService(taskRepo);
 
 /**
+ * GET request for a single task by it's ID
+ */
+router.get('/get-task/:id', async (ctx) => {
+  const taskId = ctx.params.id;
+  console.log('task id', taskId);
+  const task = await taskService.getTaskById(taskId);
+  ctx.body = task;
+});
+
+/**
  * GET request for all tasks
  */
-router.get('/tasks', async (ctx) => {
+router.get('/get-tasks', async (ctx) => {
   const tasks = await taskService.getAllTasks();
   ctx.body = tasks;
 });
@@ -26,8 +36,8 @@ router.post('/add-task', async (ctx) => {
 /**
  * DELETE request to remove a single task
  */
-router.delete('/delete-task', async (ctx) => {
-  const taskId = ctx.request.body.id;
+router.delete('/delete-task/:id', async (ctx) => {
+  const taskId = ctx.params.id;
   console.log('task id', taskId);
   taskService.deleteTask(taskId);
   ctx.body = { message: 'Task deleted!' };

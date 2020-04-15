@@ -4,3 +4,4 @@
 4.) Look into dependency injection for services
 5.) Add validation for task
 6.) Throwing error to controller
+7.) Send proper responsed back (status code, etc)

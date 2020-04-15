@@ -3,9 +3,16 @@ const Task = require('../models/task');
 /**
  * Get task by id
  */
-// exports.getTaskById = async (taskId) => {
-//   await Task.findOne({ id: taskId })
-// };
+exports.getTaskById = async (taskId) => {
+  let task;
+  try {
+    task = await Task.findOne({ _id: taskId });
+    console.log(`Succesfully found task: \n${task}`);
+  } catch (err) {
+    console.error(`Repo Error (getTaskById): \n${err}`);
+  }
+  return task;
+};
 
 /**
  * Get all the tasks
@@ -14,6 +21,7 @@ exports.getAllTasks = async () => {
   let tasks;
   try {
     tasks = await Task.find({});
+    console.log('tasks', tasks);
   } catch (err) {
     console.error(`Repo Error (getAllTasks): \n${err}`);
   }
@@ -31,6 +39,10 @@ exports.insertTask = async (task) => {
     console.error(`Repo Error (insertTask): \n${err}`);
   }
 };
+
+/**
+ * Update a task
+ */
 
 
 /**
