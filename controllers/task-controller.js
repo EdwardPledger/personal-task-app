@@ -34,6 +34,16 @@ router.post('/add-task', async (ctx) => {
 });
 
 /**
+ * PUT request to update a single task
+ */
+router.put('/update-task', async (ctx) => {
+  const updatedTaskDto = ctx.request.body;
+  console.log('updated task', updatedTaskDto);
+  taskService.updateTask(updatedTaskDto);
+  ctx.body = { message: 'Task updated!' };
+});
+
+/**
  * DELETE request to remove a single task
  */
 router.delete('/delete-task/:id', async (ctx) => {

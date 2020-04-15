@@ -31,19 +31,14 @@ exports.getAllTasks = async () => {
 /**
  * Insert a new task
  */
-exports.insertTask = async (task) => {
+exports.saveTask = async (task) => {
   try {
     await task.save();
-    console.log(`Successfully inserted new task: \n${task}`);
+    console.log(`Successfully saved task: \n${task}`);
   } catch (err) {
     console.error(`Repo Error (insertTask): \n${err}`);
   }
 };
-
-/**
- * Update a task
- */
-
 
 /**
  * Delete a task
