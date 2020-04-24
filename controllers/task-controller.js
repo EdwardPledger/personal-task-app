@@ -1,9 +1,29 @@
 const KoaRouter = require('koa-router');
+
 const TaskService = require('../services/task-service');
 const taskRepo = require('../dao/task-repo');
 
 const router = new KoaRouter();
 const taskService = new TaskService(taskRepo);
+
+/**
+ * Home page
+ */
+router.get('/', async (ctx) => {
+  try {
+    const tasks = await taskService.getAllTasks();
+    ctx.status = 200;
+    ctx.message = 'Tasks returned.';
+    ctx.blah = 'hi';
+    console.log('ctx resp', ctx);
+    return ctx.render('index', { tasks });
+  } catch (err) {
+    // Error handling
+    // ctx.body = { message: err.message };
+    // ctx.status = err.status || 500;
+    return ctx.render('index');
+  }
+});
 
 /**
  * GET request for a single task by it's ID
@@ -27,10 +47,11 @@ router.get('/get-tasks', async (ctx) => {
  * POST request to add a single task
  */
 router.post('/add-task', async (ctx) => {
-  const taskDto = ctx.request.body;
+  const taskDto = ctx.request.body; // Use destructuring method
   console.log('task', taskDto);
   taskService.insertTask(taskDto);
   ctx.body = { message: 'Task inserted!' };
+  ctx.redirect('/');
 });
 
 /**

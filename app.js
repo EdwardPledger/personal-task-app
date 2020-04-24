@@ -1,4 +1,4 @@
-const startServer = require('./config/server');
+const { startServer } = require('./config/server');
 const DatabaseConfiguration = require('./config/db');
 
 const url = 'mongodb://localhost/TaskApp';

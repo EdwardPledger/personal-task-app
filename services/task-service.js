@@ -1,4 +1,4 @@
-const { createTask } = require('../util/task-util');
+const { createTask, createUpdateTask } = require('../util/task-util');
 
 class TaskService {
   // Constructor used for dependency injection (sort of, but not really)
@@ -24,13 +24,7 @@ class TaskService {
   }
 
   async updateTask(updatedTaskDto) {
-    const updatedTask = createTask(updatedTaskDto);
-    /**
-     * Create util method to create updated task
-     */
-    // eslint-disable-next-line no-underscore-dangle
-    updatedTask._id = updatedTaskDto._id; // Use id of task to be updated
-    updatedTask.isNew = false;
+    const updatedTask = createUpdateTask(updatedTaskDto);
     console.log('updated task', updatedTask);
     await this.taskRepo.saveTask(updatedTask);
   }

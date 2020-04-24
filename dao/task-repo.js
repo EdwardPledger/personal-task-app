@@ -3,7 +3,7 @@ const Task = require('../models/task');
 /**
  * Get task by id
  */
-exports.getTaskById = async (taskId) => {
+module.exports.getTaskById = async (taskId) => {
   let task;
   try {
     task = await Task.findOne({ _id: taskId });
@@ -17,7 +17,7 @@ exports.getTaskById = async (taskId) => {
 /**
  * Get all the tasks
  */
-exports.getAllTasks = async () => {
+module.exports.getAllTasks = async () => {
   let tasks;
   try {
     tasks = await Task.find({});
@@ -29,21 +29,21 @@ exports.getAllTasks = async () => {
 };
 
 /**
- * Insert a new task
+ * Save a new task
  */
-exports.saveTask = async (task) => {
+module.exports.saveTask = async (task) => {
   try {
     await task.save();
     console.log(`Successfully saved task: \n${task}`);
   } catch (err) {
-    console.error(`Repo Error (insertTask): \n${err}`);
+    console.error(`Repo Error (saveTask): \n${err}`);
   }
 };
 
 /**
  * Delete a task
  */
-exports.deleteTask = async (taskId) => {
+module.exports.deleteTask = async (taskId) => {
   try {
     const task = await Task.findOneAndDelete({ _id: taskId });
     console.log(`Successfully deleted task: \n${task}`);
@@ -55,7 +55,7 @@ exports.deleteTask = async (taskId) => {
 /**
  * Delete all tasks
  */
-exports.deleteAllTasks = async () => {
+module.exports.deleteAllTasks = async () => {
   try {
     await Task.deleteMany({});
     console.log('Successfully deleted all tasks!');

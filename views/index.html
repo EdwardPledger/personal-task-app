@@ -1,0 +1,36 @@
+<div class="current-tasks">
+  <h2>Current Tasks</h2>
+  <ul>
+    <% tasks.forEach(function(task) { %>
+      <li><h3><%= task.name %> - <%= task.description %></h3></li>
+        <ul>
+          <li>Estimated Time: <%= task.estimatedTime %></li>
+          <li>Actual Time: <%= task.actualTime %></li>
+          <li>Status: <%= task.taskState %></li>
+        </ul>
+        <br>
+    <% }); %>
+  </ul>
+</div>
+<div class="/add-task">
+  <h2>Add Task</h2>
+  <form action="add-task" method="post">
+    <table>
+      <tr>
+        <td>Name: </td>
+        <td><input name="name" type="text"></td>
+      </tr>
+      <tr>
+        <td>Description: </td>
+        <td><textarea name="description"></textarea></td>
+      </tr>
+      <tr>
+        <td>Estimated Time: </td>
+        <td><input name="estimatedTime" type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="Save"></td>
+      </tr>
+    </table>
+  </form>
+</div>
