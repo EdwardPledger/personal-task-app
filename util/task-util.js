@@ -7,7 +7,7 @@ module.exports.createTask = (taskDto) => {
   task.taskState = true;
   task.name = taskDto.name;
   task.description = taskDto.description;
-  task.estimatedTime = taskDto.estimatedTime;
+  task.estimatedTime = taskDto.estimatedTime ? taskDto.estimatedTime : 0;
 
   return task;
 };

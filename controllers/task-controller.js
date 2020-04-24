@@ -14,13 +14,13 @@ router.get('/', async (ctx) => {
     const tasks = await taskService.getAllTasks();
     ctx.status = 200;
     ctx.message = 'Tasks returned.';
-    ctx.blah = 'hi';
-    console.log('ctx resp', ctx);
+    // console.log('ctx resp', ctx);
     return ctx.render('index', { tasks });
   } catch (err) {
     // Error handling
-    // ctx.body = { message: err.message };
-    // ctx.status = err.status || 500;
+    ctx.status = 400;
+    ctx.message = 'Error occurred.';
+    console.log('err', err);
     return ctx.render('index');
   }
 });
@@ -47,11 +47,19 @@ router.get('/get-tasks', async (ctx) => {
  * POST request to add a single task
  */
 router.post('/add-task', async (ctx) => {
-  const taskDto = ctx.request.body; // Use destructuring method
-  console.log('task', taskDto);
-  taskService.insertTask(taskDto);
-  ctx.body = { message: 'Task inserted!' };
-  ctx.redirect('/');
+  try {
+    console.log('ctx', ctx.params);
+    const taskDto = ctx.request.body; // Use destructuring method
+    console.log('task', taskDto);
+    taskService.insertTask(taskDto);
+    ctx.body = { message: 'Task inserted!' };
+    ctx.redirect('/');
+  } catch (err) {
+    ctx.status = 400;
+    ctx.message = 'Error occurred.';
+    console.log('err', err);
+    ctx.redirect('/');
+  }
 });
 
 /**
