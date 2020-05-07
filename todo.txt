@@ -6,3 +6,4 @@
 6.) Throwing error to controller
 7.) Send proper responsed back (status code, etc)
 8.) Create error page
+9.) test async/await in controller

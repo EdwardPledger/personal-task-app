@@ -3,7 +3,7 @@ const Task = require('../models/task');
 module.exports.createTask = (taskDto) => {
   console.log('taskdto', taskDto);
   const task = new Task();
-  task.actualTime = 0;
+  task.actualTime = 0; // Overwrites updating tasks
   task.taskState = true;
   task.name = taskDto.name;
   task.description = taskDto.description;
@@ -17,6 +17,7 @@ module.exports.createUpdateTask = (updatedTaskDto) => {
   // eslint-disable-next-line no-underscore-dangle
   updatedTask._id = updatedTaskDto._id; // Use id of task to be updated
   updatedTask.isNew = false;
+  console.log('udpated task util', updatedTask);
 
   return updatedTask;
 };

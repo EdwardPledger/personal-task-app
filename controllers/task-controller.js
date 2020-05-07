@@ -14,7 +14,6 @@ router.get('/', async (ctx) => {
     const tasks = await taskService.getAllTasks();
     ctx.status = 200;
     ctx.message = 'Tasks returned.';
-    // console.log('ctx resp', ctx);
     return ctx.render('index', { tasks });
   } catch (err) {
     // Error handling
@@ -48,11 +47,11 @@ router.get('/get-tasks', async (ctx) => {
  */
 router.post('/add-task', async (ctx) => {
   try {
-    console.log('ctx', ctx.params);
     const taskDto = ctx.request.body; // Use destructuring method
     console.log('task', taskDto);
     taskService.insertTask(taskDto);
-    ctx.body = { message: 'Task inserted!' };
+    ctx.status = 200;
+    ctx.message = 'Task inserted.';
     ctx.redirect('/');
   } catch (err) {
     ctx.status = 400;
@@ -66,20 +65,47 @@ router.post('/add-task', async (ctx) => {
  * PUT request to update a single task
  */
 router.put('/update-task', async (ctx) => {
-  const updatedTaskDto = ctx.request.body;
-  console.log('updated task', updatedTaskDto);
-  taskService.updateTask(updatedTaskDto);
-  ctx.body = { message: 'Task updated!' };
+  try {
+    console.log('task', ctx.request.body);
+    let updatedTaskDto = ctx.request.body;
+    const x = Object.keys(updatedTaskDto)[0];
+    updatedTaskDto = JSON.parse(x);
+    console.log(typeof updatedTaskDto);
+    console.log('updated task controller', updatedTaskDto);
+
+    const obj = '{ _id: "skk23j4rj" }';
+    JSON.parse(obj);
+
+    await taskService.updateTask(updatedTaskDto);
+    ctx.status = 200;
+    ctx.message = 'Task updated.';
+    ctx.redirect('/');
+  } catch (err) {
+    ctx.status = 400;
+    ctx.message = 'Error occurred.';
+    console.log('err', err);
+    ctx.redirect('/');
+  }
 });
 
 /**
  * DELETE request to remove a single task
  */
 router.delete('/delete-task/:id', async (ctx) => {
-  const taskId = ctx.params.id;
-  console.log('task id', taskId);
-  taskService.deleteTask(taskId);
-  ctx.body = { message: 'Task deleted!' };
+  try {
+    const taskId = ctx.params.id;
+    console.log('delete task id', taskId);
+    await taskService.deleteTask(taskId);
+    console.log('task deleted...');
+    ctx.status = 200;
+    ctx.message = 'Task deleted.';
+    // ctx.redirect('/');
+  } catch (err) {
+    ctx.status = 400;
+    ctx.message = 'Error occurred.';
+    console.log('err', err);
+    ctx.redirect('/');
+  }
 });
 
 /**

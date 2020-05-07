@@ -1,12 +1,53 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    async function updateTask(e) {
+    console.log('Updating task...');
+
+    try {
+      const task = e.target.id;
+      console.log('task', task);
+      console.log('test', {firstName: 'Greatest', lastName: 'Ever'});
+      const url = `/update-task/`;
+
+      await axios.put(url, task);
+    } catch (err) {
+      console.error(err.toString());
+    }
+  }
+
+  async function deleteTask(e) {
+    console.log('Deleting task...');
+    
+    try {
+      const url =  `/delete-task/${e.target.id}`;
+
+      await axios.delete(url);
+      location.reload();
+    } catch (err) {
+      console.error(err.toString());
+    }
+  }
+</script>
+
 <div class="current-tasks">
   <h2>Current Tasks</h2>
   <ul>
     <% tasks.forEach(function(task) { %>
       <li><h3><%= task.name %> - <%= task.description %></h3></li>
         <ul>
-          <li>Estimated Time: <%= task.estimatedTime %></li>
+          <li>
+            Estimated Time: 
+            <span contenteditable='true'><%= task.estimatedTime %></span>
+          </li>
           <li>Actual Time: <%= task.actualTime %></li>
           <li>Status: <%= task.taskState %></li>
+          <li>
+            <button id='<%= task %>' onclick="updateTask(event)">Update Task</button>
+          </li>
+          <li>
+            <button id='<%= task.id %>' onclick="deleteTask(event)">Delete Task</button>
+          </li>
         </ul>
         <br>
     <% }); %>

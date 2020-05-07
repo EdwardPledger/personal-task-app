@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.0.2",
+    "kcors": "^2.2.2",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-ejs": "^4.3.0",

@@ -25,7 +25,7 @@ class TaskService {
 
   async updateTask(updatedTaskDto) {
     const updatedTask = createUpdateTask(updatedTaskDto);
-    console.log('updated task', updatedTask);
+    console.log('updated task service', updatedTask);
     await this.taskRepo.saveTask(updatedTask);
   }
 
