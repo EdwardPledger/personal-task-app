@@ -14,13 +14,14 @@ router.get('/', async (ctx) => {
     const tasks = await taskService.getAllTasks();
     ctx.status = 200;
     ctx.message = 'Tasks returned.';
-    return ctx.render('index', { tasks });
+    // ctx.state.tasks = tasks;
+    await ctx.render('index', { tasks });
   } catch (err) {
     // Error handling
     ctx.status = 400;
     ctx.message = 'Error occurred.';
     console.log('err', err);
-    return ctx.render('index');
+    await ctx.render('index');
   }
 });
 
@@ -28,9 +29,10 @@ router.get('/', async (ctx) => {
  * GET request for a single task by it's ID
  */
 router.get('/get-task/:id', async (ctx) => {
-  const taskId = ctx.params.id;
-  console.log('task id', taskId);
-  const task = await taskService.getTaskById(taskId);
+  const { id } = ctx.params;
+  const task = await taskService.getTaskById(id);
+
+  ctx.status = 200;
   ctx.body = task;
 });
 
@@ -39,6 +41,8 @@ router.get('/get-task/:id', async (ctx) => {
  */
 router.get('/get-tasks', async (ctx) => {
   const tasks = await taskService.getAllTasks();
+
+  ctx.status = 200;
   ctx.body = tasks;
 });
 
@@ -50,9 +54,9 @@ router.post('/add-task', async (ctx) => {
     const taskDto = ctx.request.body; // Use destructuring method
     console.log('task', taskDto);
     taskService.insertTask(taskDto);
-    ctx.status = 200;
+    ctx.status = 201;
     ctx.message = 'Task inserted.';
-    ctx.redirect('/');
+    // ctx.redirect('/');
   } catch (err) {
     ctx.status = 400;
     ctx.message = 'Error occurred.';
@@ -93,13 +97,13 @@ router.put('/update-task', async (ctx) => {
  */
 router.delete('/delete-task/:id', async (ctx) => {
   try {
-    const taskId = ctx.params.id;
-    console.log('delete task id', taskId);
-    await taskService.deleteTask(taskId);
-    console.log('task deleted...');
+    const { id } = ctx.params;
+
+    await taskService.deleteTask(id);
+
+    // These are not being used (reloading home page in client)
     ctx.status = 200;
     ctx.message = 'Task deleted.';
-    // ctx.redirect('/');
   } catch (err) {
     ctx.status = 400;
     ctx.message = 'Error occurred.';

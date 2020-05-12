@@ -1,9 +1,7 @@
 1.) Look into using compression (gzip)
 2.) Remove node modules from github
-3.) Look into converting ot es6 modules for importing
 4.) Look into dependency injection for services
 5.) Add validation for task
 6.) Throwing error to controller
-7.) Send proper responsed back (status code, etc)
 8.) Create error page
-9.) test async/await in controller
+9.) Morgan only printing 400 responses

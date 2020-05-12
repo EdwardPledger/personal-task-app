@@ -17,6 +17,7 @@ module.exports.createUpdateTask = (updatedTaskDto) => {
   // eslint-disable-next-line no-underscore-dangle
   updatedTask._id = updatedTaskDto._id; // Use id of task to be updated
   updatedTask.isNew = false;
+  updatedTask.actualTime = updatedTaskDto.actualTime;
   console.log('udpated task util', updatedTask);
 
   return updatedTask;
