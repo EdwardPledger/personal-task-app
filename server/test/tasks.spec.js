@@ -21,6 +21,8 @@ afterAll(() => {
 
 describe('Task route testing...', () => {
   let response;
+  let task;
+  let testTask;
 
   test('Home Route Test...', async () => {
     response = await request(serverInstance.server).get('/');
@@ -29,9 +31,10 @@ describe('Task route testing...', () => {
     expect(response.res.statusMessage).toBe('Tasks returned.');
   });
 
-  test('Get Task by Id Route Test...', async () => {
-    const param = '5eb6f81cb3433729c498b771';
+  test('GET Task By Id Route Test...', async () => {
+    const param = '5eb6f856945f732a58b151da';
     response = await request(serverInstance.server).get(`/get-task/${param}`);
+    task = response.body;
 
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty('_id');
@@ -42,25 +45,49 @@ describe('Task route testing...', () => {
     expect(response.body).toHaveProperty('estimatedTime');
   });
 
-  test('Get All Tasks Route Test...', async () => {
+  test('GET All Tasks Route Test...', async () => {
     response = await request(serverInstance.server).get('/get-tasks');
 
     expect(response.status).toEqual(200);
     expect(response.body).toBeTruthy();
   });
 
-  test('Post Task Route Test...', async () => {
+  test('POST Task Route Test...', async () => {
     const taskDto = {
       name: 'Test task',
       description: 'This is for testing purposes',
       estimatedTime: 3,
     };
-    const task = createTask(taskDto);
-    response = await (await request(serverInstance.server).post('/add-task').send(task));
+    testTask = createTask(taskDto);
+    response = await request(serverInstance.server).post('/add-task').send(task);
 
     expect(response.status).toBe(201);
     expect(response.res.statusMessage).toBe('Task inserted.');
   });
 
-  test()
+  test('PUT Task Route Test...', async () => {
+    task.actualTime = 2; // Update task
+    response = await request(serverInstance.server).put('/update-task').send(task);
+
+    expect(response.status).toBe(200);
+    expect(response.res.statusMessage).toBe('Task updated.');
+  });
+
+  test('DELETE Task By Id Route Test...', async () => {
+    const param = testTask['_id'];
+    response = await request(serverInstance.server).delete(`/delete-task/${param}`);
+
+    expect(response.status).toBe(200);
+    expect(response.res.statusMessage).toBe('Task deleted.');
+  });
+
+  /**
+   * Initial test passed. Uncomment after thinking of a better way to test
+   */
+  // test('DELETE All Tasks Route Test...', async () => {
+  //   response = await request(serverInstance.server).delete('/delete-all-tasks');
+
+  //   expect(response.status).toBe(200);
+  //   expect(response.res.statusMessage).toBe('Task deleted.');
+  // });
 });

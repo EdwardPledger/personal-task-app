@@ -1,3 +1,7 @@
+Currently Work:
+*.) Creating tests for all apis
+*.) Implementing home page in angular
+
 1.) Look into using compression (gzip)
 2.) Remove node modules from github
 4.) Look into dependency injection for services

@@ -73,18 +73,11 @@ router.put('/update-task', async (ctx) => {
   try {
     console.log('task', ctx.request.body);
     let updatedTaskDto = ctx.request.body;
-    const x = Object.keys(updatedTaskDto)[0];
-    updatedTaskDto = JSON.parse(x);
-    console.log(typeof updatedTaskDto);
-    console.log('updated task controller', updatedTaskDto);
-
-    const obj = '{ _id: "skk23j4rj" }';
-    JSON.parse(obj);
 
     await taskService.updateTask(updatedTaskDto);
     ctx.status = 200;
     ctx.message = 'Task updated.';
-    ctx.redirect('/');
+    // ctx.redirect('/');
   } catch (err) {
     ctx.status = 400;
     ctx.message = 'Error occurred.';
@@ -99,10 +92,8 @@ router.put('/update-task', async (ctx) => {
 router.delete('/delete-task/:id', async (ctx) => {
   try {
     const { id } = ctx.params;
-
     await taskService.deleteTask(id);
 
-    // These are not being used (reloading home page in client)
     ctx.status = 200;
     ctx.message = 'Task deleted.';
   } catch (err) {
