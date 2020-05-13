@@ -1,0 +1,31 @@
+<div>
+    <h1>ADD TASK</h1>
+    <label>Task Name:
+        <input #taskName>
+    </label>
+    <button (click)="add(taskName.value); taskName.value=''">
+        Add
+    </button>
+</div>
+<div>
+    <h1>TASKS</h1>
+    <ul class="tasks">
+      <li *ngFor="let task of tasks"
+        [class.selected]="task === selectedTask"
+        (click)="onSelectTask(task)">
+        <div><span>{{ task.name }}</span></div>
+        <br>
+      </li>
+    </ul>
+</div>
+<div *ngIf="selectedTask">
+    <h2><input [(ngModel)]="selectedTask.name" placeholder="selectedTask.name"></h2>
+    <h3><input [(ngModel)]="selectedTask.description" placeholder="selectedTask.description"></h3>
+    <label>Estimated Time:
+        <input [(ngModel)]="selectedTask.estimatedTime" placeholder="selectedTask.estimatedTime">
+    </label>
+    <label>Actual Time:
+        <input [(ngModel)]="selectedTask.actualTime" placeholder="selectedTask.actualTime">
+    </label>
+    <button (click)="save()">Save</button>
+</div>

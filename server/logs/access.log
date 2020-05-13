@@ -3,3 +3,5 @@ GET /favicon.ico 404 9 - 0.349 ms
 PUT / 405 18 - 0.138 ms
 GET /favicon.ico 404 9 - 0.195 ms
 GET /get-task/?id=5eb6f81cb3433729c498b771 404 9 - 0.371 ms
+GET /update-task 405 18 - 0.492 ms
+GET /favicon.ico 404 9 - 0.136 ms

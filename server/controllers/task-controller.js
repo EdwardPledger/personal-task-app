@@ -57,7 +57,7 @@ router.post('/add-task', async (ctx) => {
     taskService.insertTask(taskDto);
     ctx.status = 201;
     ctx.message = 'Task inserted.';
-    // ctx.redirect('/');
+    ctx.body = { message: ctx.message };
   } catch (err) {
     ctx.status = 400;
     ctx.message = 'Error occurred.';
@@ -77,6 +77,7 @@ router.put('/update-task', async (ctx) => {
     await taskService.updateTask(updatedTaskDto);
     ctx.status = 200;
     ctx.message = 'Task updated.';
+    ctx.body = { message: ctx.message };
     // ctx.redirect('/');
   } catch (err) {
     ctx.status = 400;
@@ -96,6 +97,7 @@ router.delete('/delete-task/:id', async (ctx) => {
 
     ctx.status = 200;
     ctx.message = 'Task deleted.';
+    ctx.body = { message: ctx.message };
   } catch (err) {
     ctx.status = 400;
     ctx.message = 'Error occurred.';
