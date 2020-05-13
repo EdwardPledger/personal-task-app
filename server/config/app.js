@@ -23,10 +23,30 @@ render(app, {
 });
 
 app.use(cors());
+// Error handling
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    console.log('err', err);
+    
+    ctx.status = err.status || 500;
+    ctx.body = err.message;
+    /**
+     * TODO: figure out why this blocks response?
+     */
+    // ctx.app.emit('error', err, ctx);
+  }
+})
 app.use(bodyParser());
 app.use(taskController.routes());
 app.use(taskController.allowedMethods());
 app.use(serve(path.join(__dirname, '../', 'views')));
 app.use(morgan('tiny', { stream: accessLogStream }));
+
+// When error occurs
+app.on('error', (err, ctx) => {
+  console.error('SERVER ERROR: ', err);
+});
 
 module.exports = app;

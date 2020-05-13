@@ -1,5 +1,5 @@
 Currently Work:
-*.) Implementing home page in angular
+
 
 
 1.) Look into using compression (gzip)
