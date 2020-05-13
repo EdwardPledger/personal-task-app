@@ -34,6 +34,7 @@ module.exports = {
     try {
       await task.save();
       console.log(`Successfully saved task: \n${task}`);
+      return task;
     } catch (err) {
       console.error(`Repo Error (saveTask): \n${err}`);
     }

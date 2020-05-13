@@ -1,6 +1,6 @@
 Currently Work:
 *.) Implementing home page in angular
- - Can add new task from browser, but need to reload page (update displayed tasks)
+
 
 1.) Look into using compression (gzip)
 2.) Remove node modules from github

@@ -53,11 +53,13 @@ router.get('/get-tasks', async (ctx) => {
 router.post('/add-task', async (ctx) => {
   try {
     const taskDto = ctx.request.body; // Use destructuring method
-    console.log('task', taskDto);
-    taskService.insertTask(taskDto);
+    console.log(ctx.request);
+    
+    const task = await taskService.insertTask(taskDto);
+    
     ctx.status = 201;
     ctx.message = 'Task inserted.';
-    ctx.body = { message: ctx.message };
+    ctx.body = task;
   } catch (err) {
     ctx.status = 400;
     ctx.message = 'Error occurred.';

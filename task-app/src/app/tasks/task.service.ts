@@ -62,7 +62,7 @@ export class TaskService {
    */
   deleteTaskById(id: string): Observable<any> {
     return this.http.delete<Task>(`${this.domainName}/delete-task/${id}`).pipe(
-      catchError(this.handleError<any>(`deleteTask id:${id}`))
+      catchError(this.handleError<Task>(`deleteTask id:${id}`))
     );
   }
 
@@ -72,7 +72,7 @@ export class TaskService {
    */
   deleteAllTasks(): Observable<any> {
     return this.http.delete<Task[]>(`${this.domainName}/delete-all-tasks`).pipe(
-      catchError(this.handleError<any>('deleteAllTasks'))
+      catchError(this.handleError<Task[]>('deleteAllTasks'))
     );
   }
 

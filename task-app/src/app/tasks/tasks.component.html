@@ -14,6 +14,7 @@
         [class.selected]="task === selectedTask"
         (click)="onSelectTask(task)">
         <div><span>{{ task.name }}</span></div>
+        <button class="delete" title="delete task" (click)="delete(task._id)">X</button>
         <br>
       </li>
     </ul>

@@ -20,7 +20,7 @@ class TaskService {
 
   async insertTask(taskDto) {
     const task = createTask(taskDto);
-    await this.taskRepo.saveTask(task);
+    return await this.taskRepo.saveTask(task);
   }
 
   async updateTask(updatedTaskDto) {
