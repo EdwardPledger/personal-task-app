@@ -14,6 +14,8 @@ module.exports = {
             
             return await collectionInstance.findOne({ _id: id });
         } catch (err) {
+            console.log('err', err);
+            
             throw new RepoError(err.message, 'getObjectsById', collectionName, id);
         }
     },

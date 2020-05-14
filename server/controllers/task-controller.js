@@ -25,8 +25,9 @@ router.get('/', async (ctx) => {
 router.get('/get-task/:id', async (ctx) => {
   const { id } = ctx.params;
   const task = await taskService.getTaskById(id);
-  throw('Error message', 500);
+
   ctx.status = 200;
+  ctx.message = 'Task retrieved.';
   ctx.body = task;
 });
 
@@ -72,7 +73,7 @@ router.put('/update-task', async (ctx) => {
  */
 router.delete('/delete-task/:id', async (ctx) => {
   const { id } = ctx.params;
-  await taskService.deleteTask(id);
+  await taskService.deleteTaskById(id);
 
   ctx.status = 200;
   ctx.message = 'Task deleted.';

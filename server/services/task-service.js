@@ -1,4 +1,5 @@
 const { createTask, createUpdateTask } = require('../util/task-util');
+const NotFoundError = require('../errors/not-found-error');
 
 class TaskService {
   // Constructor used for dependency injection (sort of, but not really)
@@ -8,7 +9,10 @@ class TaskService {
 
   async getTaskById(taskId) {
     const task = await this.dao.getObjectById('Task', taskId);
-    if (!task) console.log('No task found');
+    
+    if (!task) {
+      throw new NotFoundError('No task found with the id provided.', 'getTaskById', 'Task', taskId);
+    }
     return task;
   }
 
@@ -19,17 +23,21 @@ class TaskService {
   }
 
   async insertTask(taskDto) {
-    // const task = createTask(taskDto);
     return await this.dao.insertObject('Task', taskDto);
   }
 
   async updateTask(updatedTaskDto) {
-    // const updatedTask = createUpdateTask(updatedTaskDto);
     return await this.dao.updateObject('Task', updatedTaskDto);
   }
 
-  async deleteTask(taskId) {
-    return await this.dao.deleteObjectById('Task', taskId);
+  async deleteTaskById(taskId) {
+    const task = await this.dao.deleteObjectById('Task', taskId);
+    
+    if (!task) {
+      throw new NotFoundError('No task found with the id provided.', 'deleteTaskById', 'Task', taskId);
+    }
+
+    return task;
   }
 
   async deleteAllTasks() {

@@ -45,8 +45,8 @@ app.use(serve(path.join(__dirname, '../', 'views')));
 app.use(morgan('combined', { stream: accessLogStream }));
 
 // When error occurs
-app.on('error', (err, ctx) => {
-  console.error('SERVER ERROR: ', err);
-});
+// app.on('error', (err, ctx) => {
+//   console.error('SERVER ERROR: ', err);
+// });
 
 module.exports = app;
