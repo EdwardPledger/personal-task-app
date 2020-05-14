@@ -3,8 +3,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
-  actualTime: Number,
-  taskState: Boolean,
+  actualTime: {
+    type: Number,
+    default: 0,
+  },
+  // false means not competed, true means completed
+  taskState: {
+    type: Boolean,
+    default: false,
+  },
   name: String,
   description: String,
   estimatedTime: Number,

@@ -4,4 +4,5 @@ export interface Task {
     name: string,
     description?: string,
     estimatedTime?: Number,
+    taskState: Boolean
   }

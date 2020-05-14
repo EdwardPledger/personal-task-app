@@ -1,9 +1,10 @@
 Currently Working On:
-
+*.) Create calendar feature
+*.) Throwing error to controller
+*.) Create a generic CRUD dao
 
 TODO:
 *.) Finalize api responses
-*.) Create calendar feature
 *.) Create error page
 *.) Add validation for task
 *.) Remove node modules from github
@@ -13,5 +14,4 @@ TODO:
 Nice To Do:
 *.) Look into using compression (gzip)
 *.) Look into dependency injection for services
-*.) Throwing error to controller
 *.) Morgan only printing 400 responses

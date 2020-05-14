@@ -2,9 +2,11 @@ const KoaRouter = require('koa-router');
 
 const TaskService = require('../services/task-service');
 const taskRepo = require('../dao/task-dao');
+const genericDao = require('../dao/crud-dao')
 
 const router = new KoaRouter();
-const taskService = new TaskService(taskRepo);
+const taskService = new TaskService(genericDao);
+
 
 /**
  * Home page
