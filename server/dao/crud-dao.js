@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const RepoError = require('../errors/repo-error');
 
 /**
  * Generic CRUD operations that can be used by any collection
@@ -13,7 +14,7 @@ module.exports = {
             
             return await collectionInstance.findOne({ _id: id });
         } catch (err) {
-            console.error(`Repo Error (getObjectById): \n${err}`);
+            throw new RepoError(err.message, 'getObjectsById', collectionName, id);
         }
     },
 
@@ -23,10 +24,10 @@ module.exports = {
     getObjects: async (collectionName) => {
         try {
             const collectionInstance = mongoose.model(collectionName);
-            throw new Error('test');
+            collectionInstance.fi.fi;
             return await collectionInstance.find({});
         } catch (err) {
-            throw new Error(`Repo Error (getObjects): \n${err}`);
+            throw new RepoError(err.message, 'getObjects', collectionName, '');
         }
     },
 
@@ -41,7 +42,7 @@ module.exports = {
 
             return await newObject.save(); 
         } catch (err) {
-            console.error(`Repo Error (insertObject): \n${err}`);
+            throw new RepoError(err.message, 'insertObject', collectionName, document);
         }
     },
 
@@ -55,7 +56,7 @@ module.exports = {
             upddatedObject._id = document._id;
             upddatedObject.isNew = false;
         } catch (err) {
-            console.error(`Repo Error (updateObject): \n${err}`);
+            throw new RepoError(err.message, 'updateObject', collectionName, document);
         }
     },
 
@@ -68,7 +69,7 @@ module.exports = {
             
             return await collectionInstance.findOneAndDelete({ _id: id });
         } catch (err) {
-            console.error(`Repo Error (deleteObjectById): \n${err}`);
+            throw new RepoError(err.message, 'deleteObjectsById', collectionName, id);
         }
     },
 
@@ -81,7 +82,7 @@ module.exports = {
 
             return await collectionInstance.deleteMany({});
         } catch (err) {
-            console.error(`Repo Error (deleteObjects): \n${err}`);
+            throw new RepoError(err.message, 'deleteObjects', collectionName, '');
         }
     }
 }

@@ -31,7 +31,7 @@ app.use(async (ctx, next) => {
     console.log('err', err);
     
     ctx.status = err.status || 500;
-    ctx.body = err.message;
+    ctx.body = err;
     /**
      * TODO: figure out why this blocks response?
      */
@@ -42,7 +42,7 @@ app.use(bodyParser());
 app.use(taskController.routes());
 app.use(taskController.allowedMethods());
 app.use(serve(path.join(__dirname, '../', 'views')));
-app.use(morgan('tiny', { stream: accessLogStream }));
+app.use(morgan('combined', { stream: accessLogStream }));
 
 // When error occurs
 app.on('error', (err, ctx) => {
