@@ -25,16 +25,15 @@ class TaskService {
 
   async updateTask(updatedTaskDto) {
     const updatedTask = createUpdateTask(updatedTaskDto);
-    console.log('updated task service', updatedTask);
-    await this.taskRepo.saveTask(updatedTask);
+    return await this.taskRepo.saveTask(updatedTask);
   }
 
   async deleteTask(taskId) {
-    await this.taskRepo.deleteTask(taskId);
+    return await this.taskRepo.deleteTask(taskId);
   }
 
   async deleteAllTasks() {
-    await this.taskRepo.deleteAllTasks();
+    return await this.taskRepo.deleteAllTasks();
   }
 }
 
