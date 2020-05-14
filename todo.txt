@@ -1,11 +1,17 @@
-Currently Work:
+Currently Working On:
 
 
+TODO:
+*.) Finalize api responses
+*.) Create calendar feature
+*.) Create error page
+*.) Add validation for task
+*.) Remove node modules from github
+*.) Implement logger
+*.) Complete a task feature
 
-1.) Look into using compression (gzip)
-2.) Remove node modules from github
-4.) Look into dependency injection for services
-5.) Add validation for task
-6.) Throwing error to controller
-8.) Create error page
-9.) Morgan only printing 400 responses
+Nice To Do:
+*.) Look into using compression (gzip)
+*.) Look into dependency injection for services
+*.) Throwing error to controller
+*.) Morgan only printing 400 responses

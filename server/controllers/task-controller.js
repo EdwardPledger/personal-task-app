@@ -1,7 +1,7 @@
 const KoaRouter = require('koa-router');
 
 const TaskService = require('../services/task-service');
-const taskRepo = require('../dao/task-repo');
+const taskRepo = require('../dao/task-dao');
 
 const router = new KoaRouter();
 const taskService = new TaskService(taskRepo);
