@@ -24,7 +24,7 @@ module.exports = {
     getObjects: async (collectionName) => {
         try {
             const collectionInstance = mongoose.model(collectionName);
-            collectionInstance.fi.fi;
+
             return await collectionInstance.find({});
         } catch (err) {
             throw new RepoError(err.message, 'getObjects', collectionName, '');
