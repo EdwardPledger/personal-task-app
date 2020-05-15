@@ -46,26 +46,25 @@ router.get('/get-tasks', async (ctx) => {
  * POST request to add a single task
  */
 router.post('/add-task', async (ctx) => {
-  const taskDto = ctx.request.body; // Use destructuring method
-  console.log(ctx.request);
+  const { body } = ctx.request;
   
-  const task = await taskService.insertTask(taskDto);
+  const insertedTask = await taskService.insertTask(body);
   
   ctx.status = 201;
   ctx.message = 'Task inserted.';
-  ctx.body = task;
+  ctx.body = insertedTask;
 });
 
 /**
  * PUT request to update a single task
  */
 router.put('/update-task', async (ctx) => {
-  let updatedTaskDto = ctx.request.body;
+  let { body } = ctx.request;
 
-  await taskService.updateTask(updatedTaskDto);
+  const updatedTask = await taskService.updateTask(body);
   ctx.status = 200;
   ctx.message = 'Task updated.';
-  ctx.body = { message: ctx.message };
+  ctx.body = updatedTask;
 });
 
 /**
@@ -73,19 +72,22 @@ router.put('/update-task', async (ctx) => {
  */
 router.delete('/delete-task/:id', async (ctx) => {
   const { id } = ctx.params;
-  await taskService.deleteTaskById(id);
+  const deletedTask = await taskService.deleteTaskById(id);
 
   ctx.status = 200;
   ctx.message = 'Task deleted.';
-  ctx.body = { message: ctx.message };
+  ctx.body = deletedTask;
 });
 
 /**
  * DELETE request to remove all tasks
  */
 router.delete('/delete-all-tasks', async (ctx) => {
-  taskService.deleteAllTasks();
-  ctx.body = { message: 'All tasks deleted!' };
+  const deletedTasks = await taskService.deleteAllTasks();
+  
+  ctx.status = 200;
+  ctx.message = 'Tasks deleted.';
+  ctx.body = deletedTasks;
 });
 
 module.exports = router;
