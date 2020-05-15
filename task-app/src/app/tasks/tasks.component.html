@@ -28,5 +28,11 @@
     <label>Actual Time:
         <input [(ngModel)]="selectedTask.actualTime" placeholder="selectedTask.actualTime">
     </label>
+    <label>Status:
+        <select [(ngModel)]="selectedTask.taskState">
+            <option selected="selectedTask.taskState" value="true">Completed</option>
+            <option value="false">Not Completed</option>
+        </select>
+    </label>
     <button (click)="save()">Save</button>
 </div>

@@ -22,47 +22,76 @@ export class TasksComponent implements OnInit {
     this.getTasks();
   }
 
+  /**
+   * Get all tasks
+   */
   async getTasks(): Promise<void> {
-    await this.taskService.getAllTasks().subscribe((results) => {
-      console.log('data', results);
-      this.tasks = results;
+    await this.taskService.getAllTasks().subscribe((tasks) => {
+      console.log(`Tasks: ${JSON.stringify(tasks, null, 2)}`);
+
+      this.tasks = tasks;
     });
   }
 
+  /**
+   * Get a specific task by id
+   * @param id - id of task
+   */
   async getTask(id: string): Promise<void> {
-    await this.taskService.getTaskById(id).subscribe((results) => {
-      console.log('data', results);
-      this.task = results;
+    await this.taskService.getTaskById(id).subscribe((task) => {
+      console.log(`Task: ${JSON.stringify(task, null, 2)}`);
+
+      this.task = task;
     })
   }
 
+  /**
+   * Can only add a task with name
+   * TODO: Update to inlcude all fields
+   * @param name 
+   */
   add(name: string): void {
     if (!name) return;
 
     this.taskService.addTask({ name } as Task)
-      .subscribe((task) => {
-        console.log('New task sent to server', task);
-        this.tasks.push(task);
+      .subscribe((newTask) => {
+        console.log(`Inserted Task: ${JSON.stringify(newTask, null, 2)}`);
+
+        this.tasks.push(newTask);
         this.location.go('/tasks'); // Hack for now to reload page
       });
   }
 
+  /**
+   * Save an exisitng task
+   */
   save(): void {
     this.taskService.updateTask(this.selectedTask)
-      .subscribe(() => console.log('Updated task sent to server'));
+      .subscribe((updatedTask) => {
+        console.log(`Updated Task: ${JSON.stringify(updatedTask, null, 2)}`);
+      });
   }
 
+  /**
+   * Delete an existing task
+   * @param id - id of task to be deleted
+   */
   delete(id: string): void {
-    this.tasks = this.tasks.filter(t => t._id != id);
+    this.tasks = this.tasks.filter(t => t._id != id); // Remove task from current array of tasks
+    
     this.taskService.deleteTaskById(id)
-      .subscribe(() => {
-        console.log(`Sent task with ${id} to be deleted`)
+      .subscribe((deletedTask) => {
+        console.log(`Deleted Task: ${JSON.stringify(deletedTask, null, 2)}`);
+
         this.location.go('/tasks'); 
       });
   }
 
+  /**
+   * Set the selected task to display full task detials
+   * @param task - selected task by user
+   */
   onSelectTask(task: Task): void {
     this.selectedTask = task;
   }
-
 }

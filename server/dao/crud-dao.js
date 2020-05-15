@@ -57,6 +57,8 @@ module.exports = {
             const upddatedObject = new collectionInstance(document);
             upddatedObject._id = document._id;
             upddatedObject.isNew = false;
+
+            return await upddatedObject.save();
         } catch (err) {
             throw new RepoError(err.message, 'updateObject', collectionName, document);
         }
