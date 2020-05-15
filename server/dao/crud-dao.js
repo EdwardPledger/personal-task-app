@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const RepoError = require('../errors/repo-error');
 
+const dailyPlanner = require('../models/daily-planner');
+
+
 /**
  * Generic CRUD operations that can be used by any collection
  */
@@ -88,5 +91,14 @@ module.exports = {
         } catch (err) {
             throw new RepoError(err.message, 'deleteObjects', collectionName, '');
         }
+    },
+    
+    test: async () => {
+        const dp = new dailyPlanner();
+        const map = new Map();
+        map.set('taskId', 'timeOfDay');
+        map.set('2jnvsld', '1-2');
+        dp.taskMap = map;
+        dp.save();
     }
 }

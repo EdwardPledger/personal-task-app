@@ -7,7 +7,7 @@ const { Schema } = mongoose;
 // TODO: Need to figure out how to store time of day
 const dailyPlannerSchema = new Schema({
     date: Date,
-    tasks: [Task]
+    taskMap: Map // Possibly change to only task ids (optimization)
 });
 
 module.exports = mongoose.model('DailyPlanner', dailyPlannerSchema);

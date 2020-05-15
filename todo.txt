@@ -1,7 +1,5 @@
 Currently Working On:
 *.) Create calendar feature
-*.) Throwing error to controller
-*.) Create a generic CRUD dao
 
 TODO:
 *.) Finalize api responses
@@ -9,7 +7,6 @@ TODO:
 *.) Add validation for task
 *.) Remove node modules from github
 *.) Implement logger
-*.) Complete a task feature
 
 Nice To Do:
 *.) Look into using compression (gzip)
