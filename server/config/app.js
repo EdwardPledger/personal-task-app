@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs');
 
 const taskController = require('../controllers/task-controller');
+const dailyPlannerController = require('../controllers/daily-planner-controller');
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, '../', 'logs', 'access.log'), { flags: 'a' });
 
@@ -28,7 +29,7 @@ app.use(async (ctx, next) => {
   try {
     await next();
   } catch (err) {
-    console.log('err', err);
+    console.log('ERROR:', err);
     
     ctx.status = err.status || 500;
     ctx.body = err;
@@ -40,6 +41,7 @@ app.use(async (ctx, next) => {
 })
 app.use(bodyParser());
 app.use(taskController.routes());
+app.use(dailyPlannerController.routes());
 app.use(taskController.allowedMethods());
 app.use(serve(path.join(__dirname, '../', 'views')));
 app.use(morgan('combined', { stream: accessLogStream }));

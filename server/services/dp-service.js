@@ -23,7 +23,7 @@ class DailyPlannerService {
    * Get all daily planners
    */
   async getAllDailyPlanners() {
-    const dailyPlanners = await this.dao.getAllDailyPlanners('DailyPlanner');
+    const dailyPlanners = await this.dao.getObjects('DailyPlanner');
 
     if (dailyPlanners.length === 0) console.log('No daily planners found in database.');
     

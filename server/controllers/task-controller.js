@@ -1,7 +1,6 @@
 const KoaRouter = require('koa-router');
 
 const TaskService = require('../services/task-service');
-const taskRepo = require('../dao/task-dao');
 const genericDao = require('../dao/crud-dao')
 
 const router = new KoaRouter();
@@ -20,7 +19,7 @@ router.get('/', async (ctx) => {
 });
 
 /**
- * GET request for a single task by it's ID
+ * GET request for a single task by it's id
  */
 router.get('/get-task/:id', async (ctx) => {
   const { id } = ctx.params;
@@ -39,7 +38,7 @@ router.get('/get-tasks', async (ctx) => {
 
   ctx.status = 200;
   ctx.message = 'Tasks retrieved.';
-  ctx.body = tasks;
+  ctx.state.tasks = tasks;
 });
 
 /**
