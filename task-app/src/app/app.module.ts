@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DailyPlannerComponent } from './daily-planner/daily-planner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksComponent,
-    DashboardComponent
+    DashboardComponent,
+    DailyPlannerComponent
   ],
   imports: [
     BrowserModule,

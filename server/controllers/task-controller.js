@@ -38,7 +38,7 @@ router.get('/get-tasks', async (ctx) => {
 
   ctx.status = 200;
   ctx.message = 'Tasks retrieved.';
-  ctx.state.tasks = tasks;
+  ctx.body = tasks;
 });
 
 /**
