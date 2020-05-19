@@ -1,1 +1,17 @@
-<p>daily-planner works!</p>
+<div>
+  <h1>Display current daily planner here (today's date)</h1>
+</div>
+<div>
+  <h1>Create new daily planner</h1>
+  <label>Month: 
+    <select [(ngModel)]="date.month">
+      <option *ngFor="let month of months">{{month}}</option>
+    </select>
+  </label>
+  <label>Day: 
+    <select [(ngModel)]="date.day">
+      <option *ngFor="let day of days">{{day}}</option>
+    </select>
+  </label>
+  <button (click)="addDailyPlanner()">Save</button>
+</div>

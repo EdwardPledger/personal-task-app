@@ -28,7 +28,6 @@ export class TasksComponent implements OnInit {
   async getTasks(): Promise<void> {
     await this.taskService.getAllTasks().subscribe((tasks) => {
       console.log(`Tasks: ${JSON.stringify(tasks, null, 2)}`);
-
       this.tasks = tasks;
     });
   }

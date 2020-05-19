@@ -1,7 +1,11 @@
 class DailyPlannerService {
   constructor(dao) {
     this.dao = dao;
-}
+  }
+
+  /**
+   * GENERAL CRUD METHODS
+   */
 
   /**
    * Get a daily planner by it's id
@@ -68,6 +72,27 @@ class DailyPlannerService {
    */
   async deleteAllDailyPlanners() {
     return await this.dao.deleteObjects('DailyPlanner');
+  }
+
+  /**
+   * SPECIFIC METHODS
+   */
+
+  /**
+   * Get an existing daily planner by it's date
+   * @param {*} date date of daily planner
+   */
+  async getDailyPlannerByDate(date) {
+    const dailyPlanner = await this.dao.getDailyPlannerByDate(date);
+
+    if (!dailyPlanner) {
+      throw new NotFoundError(
+        'No daily planner found with the date provided.', 
+        'getDailyPlannerByDate', 'DailyPlanner', date
+      );
+    }
+
+    return dailyPlanner;
   }
 }
 

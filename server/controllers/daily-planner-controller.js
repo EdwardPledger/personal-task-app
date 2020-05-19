@@ -18,6 +18,15 @@ router.get('/get-daily-planner/:id', async (ctx) => {
   ctx.body = dailyPlanner;
 });
 
+router.get('/get-daily-planner/:date', async (ctx) => {
+  const { date } = ctx.params;
+  const dailyPlanner = await dailyPlannerService.getDailyPlannerByDate(date);
+
+  ctx.status = 200;
+  ctx.message = 'Daily planner retrieved.';
+  ctx.body = dailyPlanner;
+});
+
 /**
  * GET request for all daily planners
  */

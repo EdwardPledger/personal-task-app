@@ -1,14 +1,12 @@
 const DailyPlanner = require('../models/daily-planner');
+const RepoError = require('../errors/repo-error');
 
 module.exports = {
-    /**
-     * Get daily planner by id
-     */
-    getDailyPlannerById: async (dailyPlannerId) => {
+    getDailyPlannerByDate: async (date) => {
         try {
-            return await DailyPlanner.findOne({ _id: dailyPlannerId });
+            DailyPlanner.findOne(date);
         } catch (err) {
-            console.error(`Repo Error (get)`)
+            throw new RepoError(err.message, 'getDailyPlannerByDate', 'DailyPlanner', date);
         }
     }
 }
