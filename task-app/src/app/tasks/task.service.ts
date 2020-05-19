@@ -8,7 +8,7 @@ import { Task } from './task';
   providedIn: 'root',
 })
 export class TaskService {
-  private domainName = 'http://localhost:3000';
+  private domainName: string = 'http://localhost:3000';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -46,21 +46,19 @@ export class TaskService {
 
   /**
    * Update an existing task
-   * TODO: Update any type
    * @param taskDto - the object sent with task details
    */
-  updateTask(taskDto: Task): Observable<any> {
+  updateTask(taskDto: Task): Observable<Task> {
     return this.http.put<Task>(`${this.domainName}/update-task`, taskDto, this.httpOptions).pipe(
-      catchError(this.handleError<any>('updateTask'))
+      catchError(this.handleError<Task>(`updateTask name:${taskDto.name}`))
     );
   }
 
   /**
    * Delete an existing class by it's id
-   * TODO: Update any type
    * @param id - ObjectId of task
    */
-  deleteTaskById(id: string): Observable<any> {
+  deleteTaskById(id: string): Observable<Task> {
     return this.http.delete<Task>(`${this.domainName}/delete-task/${id}`).pipe(
       catchError(this.handleError<Task>(`deleteTask id:${id}`))
     );
@@ -68,11 +66,10 @@ export class TaskService {
 
   /**
    * Delete all exisiting tasks
-   * TODO: Update any type
    */
   deleteAllTasks(): Observable<any> {
     return this.http.delete<Task[]>(`${this.domainName}/delete-all-tasks`).pipe(
-      catchError(this.handleError<Task[]>('deleteAllTasks'))
+      catchError(this.handleError<Task[]>('deleteTasks'))
     );
   }
 
