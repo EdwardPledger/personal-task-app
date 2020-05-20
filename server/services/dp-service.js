@@ -1,3 +1,5 @@
+const NotFoundError = require('../errors/not-found-error');
+
 class DailyPlannerService {
   constructor(dao) {
     this.dao = dao;
@@ -83,7 +85,9 @@ class DailyPlannerService {
    * @param {*} date date of daily planner
    */
   async getDailyPlannerByDate(date) {
-    const dailyPlanner = await this.dao.getDailyPlannerByDate(date);
+    const dateParams = date.split('-');
+    const formattedDate = new Date(dateParams[2], dateParams[0], dateParams[1], 0, 0, 0, 0);
+    const dailyPlanner = await this.dao.getDailyPlannerByDate(formattedDate);
 
     if (!dailyPlanner) {
       throw new NotFoundError(

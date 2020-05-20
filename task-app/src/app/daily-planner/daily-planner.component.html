@@ -1,5 +1,9 @@
 <div>
   <h1>Display current daily planner here (today's date)</h1>
+  <div *ngIf="todayDailyPlanner">
+    <h2>Date: {{ todayDailyPlanner.date | date }}</h2>
+    <h2>Tasks: {{ todayDailyPlanner.taskMap }}</h2>
+  </div>
 </div>
 <div>
   <h1>Create new daily planner</h1>

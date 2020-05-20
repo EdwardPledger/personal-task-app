@@ -14,13 +14,15 @@ export class DailyPlannerComponent implements OnInit {
   date = { month: 1, day: 1 };
   dailyPlannerDto : DailyPlanner;
   taskMap: Map<string, string>;
+  todayDailyPlanner: DailyPlanner;
 
   constructor(
     private dailyPlannerService: DailyPlannerService
   ) { }
 
   ngOnInit(): void {
-    this.getDailyPlanners();
+    const todayString = this.getTodayDate();
+    this.getTodayDailyPlanner(todayString);
   }
 
   /**
@@ -30,6 +32,17 @@ export class DailyPlannerComponent implements OnInit {
     await this.dailyPlannerService.getAllDailyPlanners().subscribe((dailyPlanners) => {
       console.log(`Daily Planners: ${JSON.stringify(dailyPlanners, null, 2)}`);
       this.dailyPlanners = dailyPlanners;
+    })
+  }
+
+  /**
+   * Get today's daily planner
+   * @param date today's date
+   */
+  async getTodayDailyPlanner(date: string): Promise<void> {
+    await this.dailyPlannerService.getDailyPlannerByDate(date).subscribe((todayDailyPlanner) => {
+      console.log(`Today Daily Planner: ${JSON.stringify(todayDailyPlanner, null, 2)}`);
+      this.todayDailyPlanner = todayDailyPlanner;
     })
   }
 
@@ -44,7 +57,7 @@ export class DailyPlannerComponent implements OnInit {
     this.dailyPlannerDto = { date, taskMap : this.taskMap };
     await this.dailyPlannerService.addDailyPlanner(this.dailyPlannerDto).subscribe((dailyPlanner) => {
       console.log(`Daily Planner: ${JSON.stringify(dailyPlanner, null, 2)}`);
-      this.dailyPlanners.push(dailyPlanner);
+      // this.dailyPlanners.push(dailyPlanner);
     })
   }
 
@@ -52,5 +65,11 @@ export class DailyPlannerComponent implements OnInit {
     console.log('date object', this.date);
     
     return new Date(2020, this.date.month-1, this.date.day, 0, 0, 0, 0);
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    const todayString = `${today.getMonth()}-${today.getDate()}-${today.getFullYear()}`
+    return todayString;
   }
 }

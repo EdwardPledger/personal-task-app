@@ -1,24 +1,31 @@
 const KoaRouter = require('koa-router');
 
 const DailyPlannerService = require('../services/dp-service');
+
 const genericDao = require('../dao/crud-dao')
+const dao = require('../dao/daily-planner-dao');
 
 const router = new KoaRouter();
-const dailyPlannerService = new DailyPlannerService(genericDao);
+const genericDailyPlannerService = new DailyPlannerService(genericDao);
+const dailyPlannerService = new DailyPlannerService(dao);
 
 /**
  * GET request for a single daily planner by it's id
  */
 router.get('/get-daily-planner/:id', async (ctx) => {
   const { id } = ctx.params;
-  const dailyPlanner = await dailyPlannerService.getDailyPlannerById(id);
+  const dailyPlanner = await genericDailyPlannerService.getDailyPlannerById(id);
 
   ctx.status = 200;
   ctx.message = 'Daily planner retrieved.';
   ctx.body = dailyPlanner;
 });
 
-router.get('/get-daily-planner/:date', async (ctx) => {
+/**
+ * GET request for a single daily planner by it's date
+ * Date param format -> 03-15-2020
+ */
+router.get('/get-daily-planner/date/:date', async (ctx) => {
   const { date } = ctx.params;
   const dailyPlanner = await dailyPlannerService.getDailyPlannerByDate(date);
 
@@ -31,7 +38,7 @@ router.get('/get-daily-planner/:date', async (ctx) => {
  * GET request for all daily planners
  */
 router.get('/get-daily-planners', async (ctx) => {
-  const dailyPlanners = await dailyPlannerService.getAllDailyPlanners();
+  const dailyPlanners = await genericDailyPlannerService.getAllDailyPlanners();
 
   ctx.status = 200;
   ctx.message = 'Daily planners retrieved.';
@@ -44,7 +51,7 @@ router.get('/get-daily-planners', async (ctx) => {
 router.post('/add-daily-planner', async (ctx) => {
   const { body } = ctx.request;
   
-  const insertedDailyPlanner = await dailyPlannerService.insertDailyPlanner(body);
+  const insertedDailyPlanner = await genericDailyPlannerService.insertDailyPlanner(body);
   
   ctx.status = 201;
   ctx.message = 'Daily planner inserted.';
@@ -57,7 +64,7 @@ router.post('/add-daily-planner', async (ctx) => {
 router.put('/update-daily-planner', async (ctx) => {
   let { body } = ctx.request;
 
-  const updatedDailyPlanner = await dailyPlannerService.updateDailyPlanner(body);
+  const updatedDailyPlanner = await genericDailyPlannerService.updateDailyPlanner(body);
   ctx.status = 200;
   ctx.message = 'Daily planner updated.';
   ctx.body = updatedDailyPlanner;
@@ -68,7 +75,7 @@ router.put('/update-daily-planner', async (ctx) => {
  */
 router.delete('/delete-daily-planner/:id', async (ctx) => {
   const { id } = ctx.params;
-  const deletedDailyPlanner = await dailyPlannerService.deleteDailyPlannerById(id);
+  const deletedDailyPlanner = await genericDailyPlannerService.deleteDailyPlannerById(id);
 
   ctx.status = 200;
   ctx.message = 'Daily planner deleted.';
@@ -79,7 +86,7 @@ router.delete('/delete-daily-planner/:id', async (ctx) => {
  * DELETE request to remove all daily planners
  */
 router.delete('/delete-all-daily-planners', async (ctx) => {
-  const deletedDailyPlanners = await dailyPlannerService.deleteAllDailyPlanners();
+  const deletedDailyPlanners = await genericDailyPlannerService.deleteAllDailyPlanners();
   
   ctx.status = 200;
   ctx.message = 'Daily planners deleted.';

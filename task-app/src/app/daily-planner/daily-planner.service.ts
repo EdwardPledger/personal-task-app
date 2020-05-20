@@ -30,8 +30,18 @@ export class DailyPlannerService {
    */
   getDailyPlannerById(id: string): Observable<DailyPlanner> {
     return this.http.get<DailyPlanner>(`${this.domainName}/get-daily-planner/${id}`).pipe(
-      catchError(this.handleError<DailyPlanner>(`getDailyPlanner id:${id}`))
+      catchError(this.handleError<DailyPlanner>(`getDailyPlanner id: ${id}`))
     );
+  }
+
+  /**
+   * Get an existing daily planner by it's date
+   * @param date String of daily planner date
+   */
+  getDailyPlannerByDate(date: string): Observable<DailyPlanner> {
+    return this.http.get<DailyPlanner>(`${this.domainName}/get-daily-planner/date/${date}`).pipe(
+      catchError(this.handleError<DailyPlanner>(`getDailyPlanner date: ${date}`))
+    )
   }
 
   /**
@@ -40,7 +50,7 @@ export class DailyPlannerService {
    */
   addDailyPlanner(dailyPlannerDto: DailyPlanner): Observable<DailyPlanner> {
     return this.http.post<DailyPlanner>(`${this.domainName}/add-daily-planner`, dailyPlannerDto, this.httpOptions).pipe(
-      catchError(this.handleError<DailyPlanner>(`addDailyPlanner date:${dailyPlannerDto.date}`))
+      catchError(this.handleError<DailyPlanner>(`addDailyPlanner date: ${dailyPlannerDto.date}`))
     );
   }
 
