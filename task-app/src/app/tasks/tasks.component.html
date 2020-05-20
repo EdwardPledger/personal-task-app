@@ -34,5 +34,29 @@
             <option value="false">Not Completed</option>
         </select>
     </label>
+    <br>
+    <mat-form-field>
+        <mat-label>Date:</mat-label>
+        <input matInput [matDatepicker]="taskDatePicker" placeholder="Choose a date">
+        <mat-datepicker #taskDatePicker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button (click)="taskDatePicker.open()">Open</button>
+    <mat-label>Start Time:</mat-label>
+    <mat-form-field>
+        <mat-select>
+            <mat-option *ngFor="let time of times" [value]="time">
+                {{time}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-label>End Time:</mat-label>
+    <mat-form-field>
+        <mat-select>
+            <mat-option *ngFor="let time of times" [value]="time">
+                {{time}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
     <button (click)="save()">Save</button>
 </div>

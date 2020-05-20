@@ -4,26 +4,31 @@
     padding: 0;
     width: 15em;
   }
-  .tasks li {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-  }
-  .tasks li:hover {
-    color: #607D8B;
-    background-color: #DDD;
-    left: .1em;
-  }
-  .tasks li.selected {
-    background-color: #CFD8DC;
-    color: white;
-  }
-  .tasks li.selected:hover {
-    background-color: #BBD8DC;
-    color: white;
-  }
+.tasks li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.tasks li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.tasks li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}
+.tasks li.selected:hover {
+  background-color: #BBD8DC;
+  color: white;
+}
+
+/* .date-time {
+  width: 50px;
+  height: 50px;
+} */
