@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ task.name }}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    {{ task.description }}
+    <mat-label>Estimated Time:</mat-label>
+    <input matInput [(ngModel)]="task.estimatedTime">
+  </mat-form-field>
+</div>

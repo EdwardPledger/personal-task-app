@@ -13,7 +13,7 @@ export class DailyPlannerComponent implements OnInit {
   days: Number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
   date = { month: 1, day: 1 };
   dailyPlannerDto : DailyPlanner;
-  taskMap: Map<string, string>;
+  taskMap: Map<string, string> = new Map();
   todayDailyPlanner: DailyPlanner;
 
   constructor(
@@ -22,6 +22,8 @@ export class DailyPlannerComponent implements OnInit {
 
   ngOnInit(): void {
     const todayString = this.getTodayDate();
+    console.log('today', todayString);
+    
     this.getTodayDailyPlanner(todayString);
   }
 
@@ -52,9 +54,9 @@ export class DailyPlannerComponent implements OnInit {
    */
   async addDailyPlanner(): Promise<void> {
     const date = this.createFormattedDate();
-    console.log('date', date);
-    
+
     this.dailyPlannerDto = { date, taskMap : this.taskMap };
+    console.log('dp', this.dailyPlannerDto);
     await this.dailyPlannerService.addDailyPlanner(this.dailyPlannerDto).subscribe((dailyPlanner) => {
       console.log(`Daily Planner: ${JSON.stringify(dailyPlanner, null, 2)}`);
       // this.dailyPlanners.push(dailyPlanner);

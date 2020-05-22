@@ -63,7 +63,8 @@ router.post('/add-daily-planner', async (ctx) => {
  */
 router.put('/update-daily-planner', async (ctx) => {
   let { body } = ctx.request;
-
+  console.log('body', body);
+  
   const updatedDailyPlanner = await genericDailyPlannerService.updateDailyPlanner(body);
   ctx.status = 200;
   ctx.message = 'Daily planner updated.';

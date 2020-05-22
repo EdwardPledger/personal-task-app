@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <h1>ADD TASK</h1>
     <label>Task Name:
         <input #taskName>
@@ -6,10 +6,23 @@
     <button (click)="add(taskName.value); taskName.value=''">
         Add
     </button>
-</div>
+</div> -->
 <div>
-    <h1>TASKS</h1>
-    <ul class="tasks">
+    <h1>Tasks</h1>
+    <mat-divider></mat-divider>
+    <mat-label></mat-label>
+    <mat-list class="task-list">
+        <!-- <mat-list-item *ngFor="let task of tasks">
+            <mat-card class="task" (click)="openTask()">{{ task.name }}</mat-card>
+            <mat-divider></mat-divider>
+        </mat-list-item> -->
+        <mat-card class="task" *ngFor="let task of tasks" (click)="openTask(task)">
+            <mat-card-title>{{ task.name }}</mat-card-title>
+            <mat-card-subtitle>{{ task.description }}</mat-card-subtitle>
+        </mat-card>
+        
+    </mat-list>
+    <!-- <ul class="tasks">
       <li *ngFor="let task of tasks"
         [class.selected]="task === selectedTask"
         (click)="onSelectTask(task)">
@@ -17,9 +30,9 @@
         <button class="delete" title="delete task" (click)="delete(task._id)">X</button>
         <br>
       </li>
-    </ul>
+    </ul> -->
 </div>
-<div *ngIf="selectedTask">
+<!-- <div *ngIf="selectedTask">
     <h2><input [(ngModel)]="selectedTask.name" placeholder="selectedTask.name"></h2>
     <h3><input [(ngModel)]="selectedTask.description" placeholder="selectedTask.description"></h3>
     <label>Estimated Time:
@@ -37,13 +50,13 @@
     <br>
     <mat-form-field>
         <mat-label>Date:</mat-label>
-        <input matInput [matDatepicker]="taskDatePicker" placeholder="Choose a date">
+        <input [(ngModel)]="dateAndTime.date" matInput [matDatepicker]="taskDatePicker" placeholder="Choose a date">
         <mat-datepicker #taskDatePicker></mat-datepicker>
     </mat-form-field>
     <button mat-raised-button (click)="taskDatePicker.open()">Open</button>
     <mat-label>Start Time:</mat-label>
     <mat-form-field>
-        <mat-select>
+        <mat-select [(ngModel)]="dateAndTime.startTime">
             <mat-option *ngFor="let time of times" [value]="time">
                 {{time}}
             </mat-option>
@@ -51,7 +64,7 @@
     </mat-form-field>
     <mat-label>End Time:</mat-label>
     <mat-form-field>
-        <mat-select>
+        <mat-select [(ngModel)]="dateAndTime.endTime">
             <mat-option *ngFor="let time of times" [value]="time">
                 {{time}}
             </mat-option>
@@ -59,4 +72,4 @@
     </mat-form-field>
     <br>
     <button (click)="save()">Save</button>
-</div>
+</div> -->

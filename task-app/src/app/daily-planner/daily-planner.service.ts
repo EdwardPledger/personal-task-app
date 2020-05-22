@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { DailyPlanner } from './daily-planner';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DailyPlannerService {
   private domainName: string = 'http://localhost:3000';
   private httpOptions = {
@@ -58,7 +56,9 @@ export class DailyPlannerService {
    * Update an existing daily planner
    * @param dailyPlannerDto the object sent with daily planner details
    */
-  updateTask(dailyPlannerDto: DailyPlanner): Observable<DailyPlanner> {
+  updateDailyPlanner(dailyPlannerDto: DailyPlanner): Observable<DailyPlanner> {
+    console.log('dp', dailyPlannerDto);
+    
     return this.http.put<DailyPlanner>(`${this.domainName}/update-daily-planner`, dailyPlannerDto, this.httpOptions).pipe(
       catchError(this.handleError<DailyPlanner>(`updateDailyPlanner date:${dailyPlannerDto.date}`))
     );

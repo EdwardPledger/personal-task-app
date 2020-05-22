@@ -1,4 +1,4 @@
-.tasks {
+/* .tasks {
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
@@ -26,9 +26,22 @@
 .tasks li.selected:hover {
   background-color: #BBD8DC;
   color: white;
-}
+} */
 
 /* .date-time {
   width: 50px;
   height: 50px;
 } */
+
+.task {
+  margin: 0px 0px 10px 0px;
+  max-width: 500px;
+}
+
+.task mat-card-title {
+  font-size: 18px;
+}
+
+.task mat-card-subtitle {
+  font-size: 15px;
+}
