@@ -4,7 +4,7 @@ import { TaskService } from './task.service';
 import { DailyPlannerService } from '../daily-planner/daily-planner.service';
 import { Task } from './task';
 import { formatDate } from '@angular/common';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tasks',
@@ -142,18 +142,26 @@ export class TasksComponent implements OnInit {
   }
 
   openTask(task: Task): void {
-    const dialogRef = this.dialog.open(DialogOverviewTask, {
-      width: '250px',
-      data: task
-    });
+    // const dialogRef = this.dialog.open(DialogOverviewTask, {
+    //   width: '250px',
+    //   data: task
+    // });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = task;
+    dialogConfig.width = '500px';
+    dialogConfig.height = '500px';
+    
+    this.dialog.open(DialogOverviewTask, dialogConfig);
   }
 }
 
 @Component({
   selector: 'dialog-overview-task-dialog',
-  templateUrl: 'dialog-overview-task-dialog.html'
+  templateUrl: 'dialog-overview-task-dialog.html',
+  styleUrls: ['./dialog-overview-task-dialog.css'] 
 })
 export class DialogOverviewTask {
+  options = [{"state": true}, {"state": false}];
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewTask>,
     @Inject(MAT_DIALOG_DATA) public task: Task
