@@ -149,7 +149,7 @@ export class TasksComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = task;
     dialogConfig.width = '500px';
-    dialogConfig.height = '500px';
+    dialogConfig.height = '400px';
     
     this.dialog.open(DialogOverviewTask, dialogConfig);
   }
@@ -161,7 +161,10 @@ export class TasksComponent implements OnInit {
   styleUrls: ['./dialog-overview-task-dialog.css'] 
 })
 export class DialogOverviewTask {
-  options = [{"state": true}, {"state": false}];
+  options = [
+    { "state": true, "name": "Completed" }, 
+    {"state": false, "name": "In Progress" }
+  ];
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewTask>,
     @Inject(MAT_DIALOG_DATA) public task: Task

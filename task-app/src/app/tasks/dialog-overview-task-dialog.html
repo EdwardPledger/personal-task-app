@@ -1,20 +1,25 @@
-<h1 mat-dialog-title>{{ task.name }}</h1>
+<h1 mat-dialog-title>
+  <mat-form-field>
+    <input matInput [(ngModel)]="task.name">
+  </mat-form-field>
+</h1>
 <div mat-dialog-content>
   <mat-form-field>
     <input matInput [(ngModel)]="task.description">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="estimated-time">
     <mat-label>Estimated Time:</mat-label>
     <input matInput [(ngModel)]="task.estimatedTime">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="actual-time">
     <mat-label>Actual Time:</mat-label>
     <input matInput [(ngModel)]="task.actualTime">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="status">
     <mat-label>Status:</mat-label>
     <mat-select [(ngModel)]="task.taskState">
-      <mat-option *ngFor="let option of options" [value]="option.state">{{ option.state }}</mat-option>
+      <mat-option *ngFor="let option of options" [value]="option.state">{{ option.name }}</mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-stroked-button class="save" [mat-dialog-close]="task" color="primary" cdkFocusInitial>Save</button>
 </div>
