@@ -69,12 +69,12 @@ export class TasksComponent implements OnInit {
       });
   }
 
-  /**
+    /**
    * Save an exisitng task
    */
-  save(): void {
-    this.addTaskToDailyPlanner();
-    this.taskService.updateTask(this.selectedTask)
+  updateTask(task: Task): void {
+    // this.addTaskToDailyPlanner();
+    this.taskService.updateTask(task)
       .subscribe((updatedTask) => {
         console.log(`Updated Task: ${JSON.stringify(updatedTask, null, 2)}`);
       });
@@ -142,16 +142,17 @@ export class TasksComponent implements OnInit {
   }
 
   openTask(task: Task): void {
-    // const dialogRef = this.dialog.open(DialogOverviewTask, {
-    //   width: '250px',
-    //   data: task
-    // });
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = task;
     dialogConfig.width = '500px';
     dialogConfig.height = '400px';
     
-    this.dialog.open(DialogOverviewTask, dialogConfig);
+    const dialogRef = this.dialog.open(DialogOverviewTask, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(task => {
+      console.log('Dialog closed.');
+      this.updateTask(task);
+    })
   }
 }
 
@@ -167,7 +168,8 @@ export class DialogOverviewTask {
   ];
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewTask>,
-    @Inject(MAT_DIALOG_DATA) public task: Task
+    @Inject(MAT_DIALOG_DATA) public task: Task,
+    private taskService: TaskService
   ) {}
 
   onNoClick(): void {
