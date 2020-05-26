@@ -1,32 +1,14 @@
-<!-- <div>
-    <h1>ADD TASK</h1>
-    <label>Task Name:
-        <input #taskName>
-    </label>
-    <button (click)="add(taskName.value); taskName.value=''">
-        Add
-    </button>
-</div> -->
 <div>
     <h1>Tasks</h1>
     <mat-divider></mat-divider>
     <mat-label></mat-label>
     <mat-list class="task-list">
-        <mat-card class="task" *ngFor="let task of tasks" (click)="openTask(task)">
+        <mat-card class="task" *ngFor="let task of tasks" (click)="openTaskThroughDialog(task)">
             <mat-card-title>{{ task.name }}</mat-card-title>
             <mat-card-subtitle>{{ task.description }}</mat-card-subtitle>
         </mat-card>
     </mat-list>
-    <button mat-button class="add">
+    <button mat-button class="add" (click)="addTaskThroughDialog()">
         <mat-icon svgIcon="plus"></mat-icon>
     </button>
-    <!-- <ul class="tasks">
-      <li *ngFor="let task of tasks"
-        [class.selected]="task === selectedTask"
-        (click)="onSelectTask(task)">
-        <div><span>{{ task.name }}</span></div>
-        <button class="delete" title="delete task" (click)="delete(task._id)">X</button>
-        <br>
-      </li>
-    </ul> -->
 </div>

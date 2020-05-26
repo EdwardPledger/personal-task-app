@@ -1,19 +1,19 @@
 <h1 mat-dialog-title>
   <mat-form-field>
-    <input matInput [(ngModel)]="task.name">
+    <input matInput [(ngModel)]="task.name" placeholder="Task Name" [required]="true">
   </mat-form-field>
 </h1>
 <div mat-dialog-content>
   <mat-form-field>
-    <input matInput [(ngModel)]="task.description">
+    <input matInput [(ngModel)]="task.description" placeholder="Task Description">
   </mat-form-field>
   <mat-form-field class="estimated-time">
     <mat-label>Estimated Time:</mat-label>
-    <input matInput [(ngModel)]="task.estimatedTime">
+    <input matInput [(ngModel)]="task.estimatedTime" placeholder="0">
   </mat-form-field>
   <mat-form-field class="actual-time">
     <mat-label>Actual Time:</mat-label>
-    <input matInput [(ngModel)]="task.actualTime">
+    <input matInput [(ngModel)]="task.actualTime" placeholder="0">
   </mat-form-field>
   <mat-form-field class="status">
     <mat-label>Status:</mat-label>

@@ -40,6 +40,10 @@ export class TasksComponent implements OnInit {
   }
 
   /**
+   * CRUD methods
+   */
+
+  /**
    * Get all tasks
    */
   async getTasks(): Promise<void> {
@@ -66,10 +70,10 @@ export class TasksComponent implements OnInit {
    * TODO: Update to inlcude all fields
    * @param name 
    */
-  add(name: string): void {
-    if (!name) return;
+  addTask(task: Task): void {
+    if (!task.name) return;
 
-    this.taskService.addTask({ name } as Task)
+    this.taskService.addTask(task)
       .subscribe((newTask) => {
         console.log(`Inserted Task: ${JSON.stringify(newTask, null, 2)}`);
 
@@ -105,12 +109,51 @@ export class TasksComponent implements OnInit {
   }
 
   /**
-   * Set the selected task to display full task detials
-   * @param task - selected task by user
+   * DIALOG METHODS
    */
-  onSelectTask(task: Task): void {
-    this.selectedTask = task;
+
+  /**
+   * Add a task through dialog 
+   */
+  addTaskThroughDialog(): void {
+    const newTask: Task = { name: '', description: '', estimatedTime: 0, actualTime: 0, taskState: false };    
+    const dialogRef = this.dialog.open(DialogOverviewTask, this.getDialogConfig(newTask));
+
+    dialogRef.afterClosed().subscribe(dialogTask => {
+      console.log('Add Task - Dialog closed.');
+      this.addTask(dialogTask);
+    });
   }
+
+  /**
+   * Update an existing task through dialog
+   * @param task task to be updated
+   */
+  openTaskThroughDialog(task: Task): void {
+    const dialogRef = this.dialog.open(DialogOverviewTask, this.getDialogConfig(task));
+
+    dialogRef.afterClosed().subscribe(dialogTask => {
+      console.log('Dialog closed.');
+      
+      if (dialogTask) {
+        console.log('Update task.');
+        this.updateTask(task);
+      }
+    });
+  }
+
+  getDialogConfig(task): MatDialogConfig {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = task;
+    dialogConfig.width = '500px';
+    dialogConfig.height = '400px';
+
+    return dialogConfig;
+  }
+
+  /**
+   * Daily planner methods
+   */
 
   async addTaskToDailyPlanner(): Promise<void> {
     // Figure out how to make month 0 indexed
@@ -148,20 +191,6 @@ export class TasksComponent implements OnInit {
     formattedDate = formattedDateArray.join('-');
     
     return formattedDate;
-  }
-
-  openTask(task: Task): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = task;
-    dialogConfig.width = '500px';
-    dialogConfig.height = '400px';
-    
-    const dialogRef = this.dialog.open(DialogOverviewTask, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(task => {
-      console.log('Dialog closed.');
-      this.updateTask(task);
-    })
   }
 }
 

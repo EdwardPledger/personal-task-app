@@ -2,6 +2,7 @@ Currently Working On:
 *.) Create calendar feature
 
 TODO:
+*.) Input validation for creating a task
 *.) Finalize api responses
 *.) Create error page
 *.) Add validation for task

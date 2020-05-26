@@ -56,6 +56,7 @@ import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
   providers: [
     DailyPlannerService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogOverviewTask]
 })
 export class AppModule { }
