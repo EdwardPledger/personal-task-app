@@ -97,7 +97,7 @@ export class TasksComponent implements OnInit {
    * Delete an existing task
    * @param id - id of task to be deleted
    */
-  delete(id: string): void {
+  deleteTask(id: string): void {
     this.tasks = this.tasks.filter(t => t._id != id); // Remove task from current array of tasks
     
     this.taskService.deleteTaskById(id)
@@ -136,8 +136,14 @@ export class TasksComponent implements OnInit {
       console.log('Dialog closed.');
       
       if (dialogTask) {
-        console.log('Update task.');
-        this.updateTask(task);
+        if (dialogTask.taskState == true) {
+          console.log('Delete task.');
+          this.deleteTask(dialogTask._id);
+        }
+        else {
+          console.log('Update task.');
+          this.updateTask(task);
+        }
       }
     });
   }
