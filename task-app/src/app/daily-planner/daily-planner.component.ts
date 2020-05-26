@@ -1,3 +1,4 @@
+import { CalendarView } from 'angular-calendar';
 import { DailyPlannerService } from './daily-planner.service';
 import { Component, OnInit } from '@angular/core';
 import { DailyPlanner } from './daily-planner';
@@ -16,15 +17,21 @@ export class DailyPlannerComponent implements OnInit {
   taskMap: Map<string, string> = new Map();
   todayDailyPlanner: DailyPlanner;
 
+  view: CalendarView = CalendarView.Day;
+
+  CalendarView = CalendarView;
+
+  viewDate: Date = new Date();
+
   constructor(
     private dailyPlannerService: DailyPlannerService
   ) { }
 
   ngOnInit(): void {
-    const todayString = this.getTodayDate();
-    console.log('today', todayString);
+    // const todayString = this.getTodayDate();
+    // console.log('today', todayString);
     
-    this.getTodayDailyPlanner(todayString);
+    // this.getTodayDailyPlanner(todayString);
   }
 
   /**
@@ -73,5 +80,13 @@ export class DailyPlannerComponent implements OnInit {
     const today = new Date();
     const todayString = `${today.getMonth()}-${today.getDate()}-${today.getFullYear()}`
     return todayString;
+  }
+
+  changeWeek(days): void {
+    const lastWeek: Date = new Date(
+      this.viewDate.getFullYear(), 
+      this.viewDate.getMonth(), 
+      this.viewDate.getDate() + days);
+    this.viewDate = lastWeek;
   }
 }

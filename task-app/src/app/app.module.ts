@@ -22,6 +22,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatButtonModule,
     // MatIconRegistry,
-    MatIconModule
+    MatIconModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [
     DailyPlannerService
