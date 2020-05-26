@@ -12,16 +12,14 @@
     <mat-divider></mat-divider>
     <mat-label></mat-label>
     <mat-list class="task-list">
-        <!-- <mat-list-item *ngFor="let task of tasks">
-            <mat-card class="task" (click)="openTask()">{{ task.name }}</mat-card>
-            <mat-divider></mat-divider>
-        </mat-list-item> -->
         <mat-card class="task" *ngFor="let task of tasks" (click)="openTask(task)">
             <mat-card-title>{{ task.name }}</mat-card-title>
             <mat-card-subtitle>{{ task.description }}</mat-card-subtitle>
         </mat-card>
-        
     </mat-list>
+    <button mat-button class="add">
+        <mat-icon svgIcon="plus"></mat-icon>
+    </button>
     <!-- <ul class="tasks">
       <li *ngFor="let task of tasks"
         [class.selected]="task === selectedTask"
@@ -32,44 +30,3 @@
       </li>
     </ul> -->
 </div>
-<!-- <div *ngIf="selectedTask">
-    <h2><input [(ngModel)]="selectedTask.name" placeholder="selectedTask.name"></h2>
-    <h3><input [(ngModel)]="selectedTask.description" placeholder="selectedTask.description"></h3>
-    <label>Estimated Time:
-        <input [(ngModel)]="selectedTask.estimatedTime" placeholder="selectedTask.estimatedTime">
-    </label>
-    <label>Actual Time:
-        <input [(ngModel)]="selectedTask.actualTime" placeholder="selectedTask.actualTime">
-    </label>
-    <label>Status:
-        <select [(ngModel)]="selectedTask.taskState">
-            <option selected="selectedTask.taskState" value="true">Completed</option>
-            <option value="false">Not Completed</option>
-        </select>
-    </label>
-    <br>
-    <mat-form-field>
-        <mat-label>Date:</mat-label>
-        <input [(ngModel)]="dateAndTime.date" matInput [matDatepicker]="taskDatePicker" placeholder="Choose a date">
-        <mat-datepicker #taskDatePicker></mat-datepicker>
-    </mat-form-field>
-    <button mat-raised-button (click)="taskDatePicker.open()">Open</button>
-    <mat-label>Start Time:</mat-label>
-    <mat-form-field>
-        <mat-select [(ngModel)]="dateAndTime.startTime">
-            <mat-option *ngFor="let time of times" [value]="time">
-                {{time}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-label>End Time:</mat-label>
-    <mat-form-field>
-        <mat-select [(ngModel)]="dateAndTime.endTime">
-            <mat-option *ngFor="let time of times" [value]="time">
-                {{time}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <br>
-    <button (click)="save()">Save</button>
-</div> -->

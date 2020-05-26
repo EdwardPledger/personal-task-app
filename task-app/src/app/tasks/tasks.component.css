@@ -45,3 +45,7 @@
 .task mat-card-subtitle {
   font-size: 15px;
 }
+
+.add {
+  float: right;
+}

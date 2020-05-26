@@ -21,6 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatListModule,
     MatCardModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    // MatIconRegistry,
+    MatIconModule
   ],
   providers: [
     DailyPlannerService

@@ -5,6 +5,8 @@ import { DailyPlannerService } from '../daily-planner/daily-planner.service';
 import { Task } from './task';
 import { formatDate } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tasks',
@@ -23,8 +25,15 @@ export class TasksComponent implements OnInit {
     private dailyPlannerService: DailyPlannerService,
     private location: Location,
     @Inject(LOCALE_ID) private locale: string,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'plus',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/iconmonstr-plus-circle-thin.svg')
+    )
+  }
 
   ngOnInit(): void {
     this.getTasks();
